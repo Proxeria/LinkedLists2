@@ -5,7 +5,7 @@
 //all the libararies
 #include <iostream>
 #include <cstring>
-#include "student.h"
+#include "Student.h"
 
 using namespace std;
 

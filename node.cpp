@@ -22,5 +22,5 @@ Student* Node::getStudent(){ //returns a pointer to the student associated with 
 }
 
 Node::~Node(){//destructor
-  delete student;
+  delete kid;
 }
