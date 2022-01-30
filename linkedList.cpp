@@ -12,12 +12,13 @@ void print(Node* next);
 Node* head = NULL;
 
 int main() {
-  add(new Student(3));
+  add(new Student((char*)("bob"), (char*)("joe"), 777, 7.7));
   print(head);
-  add(new Student(5));
+  add(new Student((char*)("phil"), (char*)("tom"), 888, 8.88));
   print(head);
-  add(new Student(7));
+  add(new Student((char*)("tim"), (char*)("tim"), 999, 9.99));
   print(head);
+  
 }
 
 void add(Student* student) {
@@ -38,8 +39,12 @@ void print(Node* next) {
     cout << "list:";
   }
   if (next != NULL) {
+    cout << next->getStudent()->getFirstname() << " ";
+    cout << next->getStudent()->getLastname() << " ";
     cout << next->getStudent()->getStudentID() << " ";
+    cout << next->getStudent()->getGPA() << " ";
     print(next->getNext());
+    
   }
   else {
     cout << endl;

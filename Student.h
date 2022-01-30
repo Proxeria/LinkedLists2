@@ -6,13 +6,17 @@ using namespace std;
 
 class Student {
  public:
-  Student(int newStudentID);
+  Student(char* newFirstname, char* newLastname, int newStudentID, float newStudentGPA);
   ~Student();
+  char* getFirstname();
+  char* getLastname();
   int getStudentID();
+  float getGPA();
+  
  private:
-  // char firstname[50];
-  //char lastName[50];
+  char* firstname;
+  char* lastname;
   int studentID;
-  //float studentGPA;
+  float studentGPA;
 };
 #endif
