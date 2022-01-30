@@ -6,7 +6,7 @@ using namespace std;
 //students have only ids at the moment
 //students are under node, no user interaction yet
 
-void add(Student* student);
+void add(Node*, Node*, Student* student);
 void print(Node* next);
 Student* getStudent();
 float average(Node* next);
@@ -27,7 +27,7 @@ int main() {
     cin.getline(input, 50, '\n');
     //if ADD, add new student
     if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
-      add(getStudent());
+      add(NULL, head, getStudent());
       cout << "Student added! " << endl;
     }
     //if PRINT, print all currently stored students
@@ -61,24 +61,30 @@ int main() {
 
 
 
-void add(Student* student) {
-  Node* previous = NULL;
-  Node* current = head;
-  Node* newNode = new Node(student);
+void add(Node* previous, Node* current, Student* student) {
+  Node* newNode = NULL;
   if (current == NULL) {
-    head = newNode;
+    newNode = new Node(student);
+    if (previous != NULL) {
+      previous->setNext(newNode);
+    }
+    else {
+      head = newNode;
+    }
   }
   else {
-    while (current != NULL && student->getStudentID() > current->getStudent()->getStudentID()) {
-      previous = current;
-      current = current->getNext();
+    if (current != NULL && student->getStudentID() > current->getStudent()->getStudentID()) {
+      add(current, current->getNext(), student);
+      return;
     }
+    newNode = new Node(student);
     if (previous == NULL) {
       head = newNode;
     }
     else {
       previous->setNext(newNode);
     }
+    
     newNode->setNext(current);
   }
 }
