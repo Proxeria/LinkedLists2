@@ -16,74 +16,74 @@ Node* head = NULL;
 int main() {
   
   char input[50];
-  // add(getStudent());
-  // print(head);
-  // add(new Student((char*)("bob"), (char*)("joe"), 777, 7.7));
-  // print(head);
-  // add(new Student((char*)("phil"), (char*)("tom"), 888, 8.88));
-  // print(head);
-  // add(new Student((char*)("tim"), (char*)("tim"), 999, 9.99));
-  // print(head);
-
   while (true) {
-  
-      cout << "COMMANDS: "<< endl << "ADD: Create a new entry to the student list"
-	   << endl << "PRINT: Prints all current entries in the student list"
-	   << endl << "DELETE: Deletes speciied student from the list"
-	   << endl << "AVERAGE: Prints the average of all student GPAs"
-	   << endl << "QUIT: Exits the program" << endl;
-      cin.getline(input, 50, '\n');
-      //if ADD, add new student
-      if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
-	add(getStudent());
-	cout << "Student added! " << endl;
-      }
-      //if PRINT, print all currently stored students
-      else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
-	print(head);
-      }
-      //if DELETE, delete student from list
-      else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
-	int delId;
-	cout << "Enter the id of the student you would like to remove from the list: " << endl;
-	cin.getline(input, 50, '\n');
-	//delId = atoi (input);
-	// vector<Student>::iterator it;
-	// for (it = students.begin(); it != students.end(); it++) {
-	// if (delId == it->id) {
-	//	students.erase(it);
-	//  }
-	//}
-      }
-      else if (strcmp(input,"AVERAGE") == 0 || strcmp(input,"average") == 0) {
-	cout << average(head) << endl;
-      }
-      //if QUIT, exit program
-      else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
-	break;
-      }
-      //else, cmd not recognized
-      else if (strcmp(input,"QUIT") != 0 && strcmp(input,"quit") != 0
-	       && strcmp(input,"DELETE") != 0 && strcmp(input,"delete") != 0 &&
-	       strcmp(input,"PRINT") != 0 && strcmp(input,"print") != 0
-	       && strcmp(input,"ADD") != 0 && strcmp(input,"add") != 0) {
-	cout << "Command not recognized" << endl;
-      }
+    
+    cout << "COMMANDS: "<< endl << "ADD: Create a new entry to the student list"
+	 << endl << "PRINT: Prints all current entries in the student list"
+	 << endl << "DELETE: Deletes speciied student from the list"
+	 << endl << "AVERAGE: Prints the average of all student GPAs"
+	 << endl << "QUIT: Exits the program" << endl;
+    cin.getline(input, 50, '\n');
+    //if ADD, add new student
+    if (strcmp(input,"ADD") == 0 || strcmp(input,"add") == 0) {
+      add(getStudent());
+      cout << "Student added! " << endl;
     }
+    //if PRINT, print all currently stored students
+    else if (strcmp(input,"PRINT") == 0 || strcmp(input,"print") == 0) {
+      print(head);
+    }
+    //if DELETE, delete student from list
+    else if (strcmp(input,"DELETE") == 0 || strcmp(input,"delete") == 0) {
+      int delId;
+      cout << "Enter the id of the student you would like to remove from the list: " << endl;
+      cin.getline(input, 50, '\n');
+      //delId = atoi (input);
+      // vector<Student>::iterator it;
+      // for (it = students.begin(); it != students.end(); it++) {
+      // if (delId == it->id) {
+      //	students.erase(it);
+      //  }
+      //}
+    }
+    else if (strcmp(input,"AVERAGE") == 0 || strcmp(input,"average") == 0) {
+      cout << average(head) << endl;
+    }
+    //if QUIT, exit program
+    else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
+      break;
+    }
+    //else, cmd not recognized
+    else if (strcmp(input,"QUIT") != 0 && strcmp(input,"quit") != 0
+	     && strcmp(input,"DELETE") != 0 && strcmp(input,"delete") != 0 &&
+	     strcmp(input,"PRINT") != 0 && strcmp(input,"print") != 0
+	     && strcmp(input,"ADD") != 0 && strcmp(input,"add") != 0) {
+      cout << "Command not recognized" << endl;
+    }
+  }
 }
 
 
 
 void add(Student* student) {
+  Node* previous = NULL;
   Node* current = head;
+  Node* newNode = new Node(student);
   if (current == NULL) {
-    head = new Node(student);
+    head = newNode;
   }
   else {
-    while (current->getNext() != NULL) {
+    while (current != NULL && student->getStudentID() > current->getStudent()->getStudentID()) {
+      previous = current;
       current = current->getNext();
     }
-    current->setNext(new Node(student));
+    if (previous == NULL) {
+      head = newNode;
+    }
+    else {
+      previous->setNext(newNode);
+    }
+    newNode->setNext(current);
   }
 }
 
