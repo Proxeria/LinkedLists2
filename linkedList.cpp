@@ -8,10 +8,14 @@ using namespace std;
 
 void add(Student* student);
 void print(Node* next);
+Student* getStudent();
 
 Node* head = NULL;
 
 int main() {
+
+  add(getStudent());
+  print(head);
   add(new Student((char*)("bob"), (char*)("joe"), 777, 7.7));
   print(head);
   add(new Student((char*)("phil"), (char*)("tom"), 888, 8.88));
@@ -49,4 +53,25 @@ void print(Node* next) {
   else {
     cout << endl;
   }
+}
+
+Student* getStudent() {
+  char input[50];
+  char firstname[50];
+  char lastname[50];
+  int studentid;
+  float studentgpa;
+  //change to cstring stuff
+  cout << "Student's first name: ";
+  cin.getline(firstname, sizeof(firstname), '\n');
+  cout << "Student's last name: ";
+  cin.getline(lastname, sizeof(lastname), '\n');
+  cout << "Student's ID#: ";
+  cin.getline(input, 50, '\n');
+  studentid = atoi (input);
+  cout << "Student's GPA: ";
+  cin.getline(input, 50, '\n');
+  studentgpa = atof (input);
+
+  return new Student(firstname, lastname, studentid, studentgpa);
 }
