@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include "node.h"
 
 using namespace std;
@@ -43,7 +44,8 @@ int main() {
       deleteNode(NULL, head, delId);
     }
     else if (strcmp(input,"AVERAGE") == 0 || strcmp(input,"average") == 0) {
-      cout << average(head) << endl;
+      cout << std::fixed;
+      cout << std::setprecision(2) << average(head) << endl;
     }
     //if QUIT, exit program
     else if (strcmp(input,"QUIT") == 0 || strcmp(input,"quit") == 0) {
