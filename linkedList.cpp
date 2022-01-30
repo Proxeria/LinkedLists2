@@ -10,6 +10,7 @@ void add(Student* student);
 void print(Node* next);
 Student* getStudent();
 float average(Node* next);
+void deleteNode(Node*, Node*, int);
 
 Node* head = NULL;
 
@@ -38,13 +39,8 @@ int main() {
       int delId;
       cout << "Enter the id of the student you would like to remove from the list: " << endl;
       cin.getline(input, 50, '\n');
-      //delId = atoi (input);
-      // vector<Student>::iterator it;
-      // for (it = students.begin(); it != students.end(); it++) {
-      // if (delId == it->id) {
-      //	students.erase(it);
-      //  }
-      //}
+      delId = atoi (input);
+      deleteNode(NULL, head, delId);
     }
     else if (strcmp(input,"AVERAGE") == 0 || strcmp(input,"average") == 0) {
       cout << average(head) << endl;
@@ -121,6 +117,27 @@ Student* getStudent() {
   studentgpa = atof (input);
 
   return new Student(firstname, lastname, studentid, studentgpa);
+}
+
+void deleteNode(Node* previous, Node* next, int studentID) {
+  if (next == NULL) {
+    return;
+  }
+  else {
+    if (studentID != next->getStudent()->getStudentID()) {
+      deleteNode(next, next->getNext(), studentID);
+      return;
+    }
+    else {
+      if (previous == NULL) {
+	head = next->getNext();
+      }
+      else {
+	previous->setNext(next->getNext());
+      }
+      delete next;
+    }
+  }
 }
 
 float sum(Node* next) {
